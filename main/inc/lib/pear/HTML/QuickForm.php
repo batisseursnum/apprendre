@@ -700,7 +700,7 @@ class HTML_QuickForm extends HTML_Common
         $createElement = false
     ) {
         static $anonGroups = 1;
-
+        if ($name == null) { $name = ''; }
         if (0 == strlen($name)) {
             $name = 'qf_group_'.$anonGroups++;
             $appendName = false;
@@ -708,7 +708,6 @@ class HTML_QuickForm extends HTML_Common
         if ($createElement) {
             return $this->createElement('group', $name, $groupLabel, $elements, $separator, $appendName);
         }
-
         return $this->addElement('group', $name, $groupLabel, $elements, $separator, $appendName);
     }
 

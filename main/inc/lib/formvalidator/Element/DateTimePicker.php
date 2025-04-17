@@ -6,6 +6,8 @@
  */
 class DateTimePicker extends HTML_QuickForm_text
 {
+
+    public $_appendName;
     /**
      * DateTimePicker constructor.
      *
