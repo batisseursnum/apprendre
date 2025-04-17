@@ -813,20 +813,7 @@ class Template
             }
         }
 
-        $viewBySession = api_get_setting('my_courses_view_by_session') === 'true';
-
-        if ($viewBySession || api_is_global_chat_enabled()) {
-            // Do not include the global chat in LP
-            if ($this->show_learnpath == false &&
-                $this->show_footer == true &&
-                $this->hide_global_chat == false
-            ) {
-                $js_files[] = 'chat/js/chat.js';
-                $bowerJsFiles[] = 'linkifyjs/linkify.js';
-                $bowerJsFiles[] = 'linkifyjs/linkify-jquery.js';
-            }
-        }
-
+       
         $features = api_get_configuration_value('video_features');
         if (!empty($features) && isset($features['features'])) {
             foreach ($features['features'] as $feature) {
@@ -932,14 +919,7 @@ class Template
         global $disable_js_and_css_files;
         $js_files = [];
         $bower = '';
-        if (api_is_global_chat_enabled()) {
-            //Do not include the global chat in LP
-            if ($this->show_learnpath == false && $this->show_footer == true && $this->hide_global_chat == false) {
-                $js_files[] = 'chat/js/chat.js';
-                $bower .= '<script src="'.api_get_path(WEB_PUBLIC_PATH).'assets/linkifyjs/linkify.js"></script>';
-                $bower .= '<script src="'.api_get_path(WEB_PUBLIC_PATH).'assets/linkifyjs/linkify-jquery.js"></script>';
-            }
-        }
+      
         $js_file_to_string = '';
         foreach ($js_files as $js_file) {
             $js_file_to_string .= api_get_js($js_file);

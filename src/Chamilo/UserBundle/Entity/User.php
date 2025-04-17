@@ -33,6 +33,46 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
  */
 class User implements UserInterface //implements ParticipantInterface, ThemeUser
 {
+
+    
+    /**
+     * Serializes the user.
+     *
+     * @return array
+     */
+    public function __serialize(): array
+    {
+        return [
+            'password' => $this->password,
+            'salt' => $this->salt,
+            'usernameCanonical' => $this->usernameCanonical,
+            'username' => $this->username,
+            'expired' => $this->expired,
+            'locked' => $this->locked,
+            'credentialsExpired' => $this->credentialsExpired,
+            'enabled' => $this->enabled,
+            'id' => $this->id,
+        ];
+    }
+
+    /**
+     * Unserializes the user.
+     *
+     * @param array $data
+     */
+    public function __unserialize(array $data): void
+    {
+        $this->password = $data['password'];
+        $this->salt = $data['salt'];
+        $this->usernameCanonical = $data['usernameCanonical'];
+        $this->username = $data['username'];
+        $this->expired = $data['expired'];
+        $this->locked = $data['locked'];
+        $this->credentialsExpired = $data['credentialsExpired'];
+        $this->enabled = $data['enabled'];
+        $this->id = $data['id'];
+    }
+
     public const COURSE_MANAGER = 1;
     public const TEACHER = 1;
     public const SESSION_ADMIN = 3;

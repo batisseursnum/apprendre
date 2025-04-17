@@ -19,7 +19,7 @@ use ChamiloSession as Session;
  */
 $originalDisplayErrors = ini_get('display_errors');
 $originalMemoryLimit = ini_get('memory_limit');
-
+$updateFromConfigFile = '';
 ini_set('display_errors', '1');
 ini_set('log_errors', '1');
 ini_set('memory_limit', -1);

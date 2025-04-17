@@ -59,9 +59,9 @@ class CForumThreadQualify
     /**
      * @var float
      *
-     * @ORM\Column(name="qualify", type="float", precision=6, scale=2, nullable=false)
+     * @ORM\Column(name="qualifyS", type="float", precision=6, scale=2, nullable=false)
      */
-    protected $qualify;
+    protected $qualifyS;
 
     /**
      * @var int
