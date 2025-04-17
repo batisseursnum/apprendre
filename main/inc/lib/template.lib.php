@@ -751,6 +751,7 @@ class Template
         $this->assign('show_media_element', 1);
     }
 
+
     /**
      * Declare and define the template variable that will be used to load
      * javascript libraries in the header.
@@ -779,10 +780,13 @@ class Template
             $js_files[] = 'fontresize.js';
         }
 
+        $js_header_to_string = '<script src="'.api_get_cdn_path(api_get_path(WEB_PUBLIC_PATH).'assets/jquery/dist/jquery.min.js').'"></script>'."\n";
+        $js_header_to_string .= '<script>var _p = '.json_encode($this->getWebPaths(), JSON_PRETTY_PRINT).'</script>';
+
         $js_file_to_string = '';
         $bowerJsFiles = [
             'modernizr/modernizr.js',
-            'jquery/dist/jquery.min.js',
+            //'jquery/dist/jquery.min.js',
             'bootstrap/dist/js/bootstrap.min.js',
             'jquery-ui/jquery-ui.min.js',
             'jqueryui-touch-punch/jquery.ui.touch-punch.min.js',
@@ -827,7 +831,7 @@ class Template
         }
 
         if (api_get_setting('include_asciimathml_script') === 'true') {
-            $bowerJsFiles[] = 'MathJax/MathJax.js?config=TeX-MML-AM_HTMLorMML';
+           // $bowerJsFiles[] = 'MathJax/MathJax.js?config=TeX-MML-AM_HTMLorMML';
         }
 
         // If not English and the language is supported by timepicker, localize
@@ -866,10 +870,10 @@ class Template
 
         if (!$disable_js_and_css_files) {
             $this->assign('js_file_to_string', $js_file_to_string);
-
-            $extraHeaders = '<script>var _p = '.json_encode($this->getWebPaths(), JSON_PRETTY_PRINT).'</script>';
+            $this->assign('js_header_to_string', $js_header_to_string);
+          
             // Adding jquery ui by default
-            $extraHeaders .= api_get_jquery_ui_js();
+            $extraHeaders = api_get_jquery_ui_js();
             if (isset($htmlHeadXtra) && $htmlHeadXtra) {
                 foreach ($htmlHeadXtra as &$this_html_head) {
                     $extraHeaders .= $this_html_head."\n";

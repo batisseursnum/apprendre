@@ -9,3 +9,5 @@ app/config/course_info.conf.php
 app/cache/twig/
 app/cache/Serializer/
 app/cache/
+app/courses/*
+!app/courses/proxy.php

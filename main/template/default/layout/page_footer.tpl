@@ -59,5 +59,8 @@
 {{ css_static_file_to_string }}
 {{ css_custom_file_to_string }}
 {{ css_style_print }}
+{{ js_file_to_string }}
+
+{{ extra_headers }}
 
 {{ execution_stats }}

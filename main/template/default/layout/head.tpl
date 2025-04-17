@@ -15,10 +15,9 @@
 <title>{{ title_string }}</title>
 {{ social_meta }}
 
-{{ js_file_to_string }}
+{{ js_header_to_string }}
 
 
-{{ extra_headers }}
 
 {% if _s.language_interface %}
 <script src="{{ _p.web }}web/build/main.{{ _s.language_interface }}.js"></script>
