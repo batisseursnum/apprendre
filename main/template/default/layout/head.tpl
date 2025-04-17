@@ -8,6 +8,7 @@
 {{ favico }}
 <link rel="apple-touch-icon" href="{{ _p.web }}apple-touch-icon.png" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="generator" content="Apprendre" />
 {#  Use the latest engine in ie8/ie9 or use google chrome engine if available  #}
 {#  Improve usability in portal devices #}

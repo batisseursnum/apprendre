@@ -183,6 +183,7 @@ if (api_is_allowed_to_edit(false, true) ||
         ];
     }
 
+    /*
     if (GroupManager::TOOL_NOT_AVAILABLE != $current_group['chat_state']) {
         // Link to the chat area of this group
         if (api_get_course_setting('allow_open_chat_window')) {
@@ -200,6 +201,7 @@ if (api_is_allowed_to_edit(false, true) ||
             ];
         }
     }
+    */
 
     $enabled = api_get_plugin_setting('bbb', 'tool_enable');
     if ('true' === $enabled) {

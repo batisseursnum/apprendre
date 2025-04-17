@@ -678,7 +678,7 @@ function checkSessionTime()
 {
 
        $.ajax({
-        url: 'main/inc/ajax/session_clock.ajax.php?action=time',
+        url: _p["web_main"] + 'inc/ajax/session_clock.ajax.php?action=time',
         method: 'GET',
         dataType: 'json',
         success: function(data) {
