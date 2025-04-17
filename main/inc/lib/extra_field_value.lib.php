@@ -27,6 +27,7 @@ class ExtraFieldValue extends Model
     ];
     /** @var ExtraField */
     public $extraField;
+    public $table_handler_field = '';
 
     /**
      * Formats the necessary elements for the given datatype.

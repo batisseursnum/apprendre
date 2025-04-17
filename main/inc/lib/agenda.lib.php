@@ -32,6 +32,18 @@ class Agenda
     private $sessionInfo;
     /** @var bool */
     private $isAllowedToEdit;
+    
+    private $tbl_global_agenda;
+    private $tbl_personal_agenda;
+    private $tbl_course_agenda;
+    private $table_repeat;
+
+    private $event_platform_color;
+    private $event_course_color;
+    private $event_group_color;
+    private $event_session_color;
+    private $eventOtherSessionColor;
+    private $event_personal_color;
 
     /**
      * Constructor.
@@ -3988,6 +4000,8 @@ class Agenda
         $everyone = false;
         $groupId = null;
         $userId = null;
+
+        if ($filter == null) {$filter = '';}
 
         if ($filter == 'everyone') {
             $everyone = true;

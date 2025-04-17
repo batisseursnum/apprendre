@@ -719,14 +719,24 @@ function api_format_date($time, $format = null, $language = null)
         $date_format = str_replace(
             ['%A', '%a', '%B', '%b'],
             [
-                $translated['days_long'][(int) strftime('%w', $time)],
-                $translated['days_short'][(int) strftime('%w', $time)],
-                $translated['months_long'][(int) strftime('%m', $time) - 1],
-                $translated['months_short'][(int) strftime('%m', $time) - 1],
+                $translated['days_long'][(int) (new DateTime('@' . $time))->format('w')],
+                $translated['days_short'][(int) (new DateTime('@' . $time))->format('w')],
+                $translated['months_long'][(int) (new DateTime('@' . $time))->format('m') - 1],
+                $translated['months_short'][(int) (new DateTime('@' . $time))->format('m') - 1],
             ],
             $date_format
         );
-        $formatted_date = api_to_system_encoding(strftime($date_format, $time), 'UTF-8');
+        
+        // strftime is deprecated in PHP 8.1 and removed in PHP 8.3. Replace it with IntlDateFormatter.
+        $formatter = new IntlDateFormatter(
+            $language ?? 'en_US',
+            IntlDateFormatter::FULL,
+            IntlDateFormatter::FULL,
+            date_default_timezone_get(),
+            IntlDateFormatter::GREGORIAN,
+            $date_format
+        );
+        $formatted_date = $formatter->format($time);
     }
     date_default_timezone_set($system_timezone);
 

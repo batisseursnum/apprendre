@@ -308,10 +308,12 @@ class Utf8
 
     public static function strtolower($s)
     {
+        if (null === $s) {$s = '';}
         return mb_strtolower($s, 'UTF-8');
     }
     public static function strtoupper($s)
     {
+        if (null === $s) {$s = '';}
         return mb_strtoupper($s, 'UTF-8');
     }
 

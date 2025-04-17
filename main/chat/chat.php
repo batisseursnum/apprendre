@@ -29,7 +29,7 @@ foreach ($externalCSS as $css) {
     $htmlHeadXtra[] = api_get_css(api_get_path(WEB_LIBRARY_JS_PATH).$css);
 }
 
-$htmlHeadXtra[] = api_get_css(api_get_path(WEB_CSS_PATH).'chat.css');
+// $htmlHeadXtra[] = api_get_css(api_get_path(WEB_CSS_PATH).'chat.css');
 $htmlHeadXtra[] = api_get_css(api_get_path(WEB_CSS_PATH).'markdown.css');
 
 $externalJS = [

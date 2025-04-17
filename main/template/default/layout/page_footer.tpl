@@ -56,4 +56,8 @@
     </section>
 </div>
 
+{{ css_static_file_to_string }}
+{{ css_custom_file_to_string }}
+{{ css_style_print }}
+
 {{ execution_stats }}

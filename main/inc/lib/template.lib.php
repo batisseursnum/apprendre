@@ -47,6 +47,7 @@ class Template
 
     /* Loads chamilo plugins */
     public $load_plugins = false;
+    public $hide_global_chat = false;
     public $params = [];
     public $force_plugin_load = false;
     public $responseCode = 0;
@@ -666,9 +667,6 @@ class Template
 
         $css[] = $webJsPath.'chosen/chosen.css';
 
-        if (api_is_global_chat_enabled()) {
-            $css[] = $webJsPath.'chat/css/chat.css';
-        }
         $css_file_to_string = '';
         foreach ($css as $file) {
             $css_file_to_string .= api_get_css($file);

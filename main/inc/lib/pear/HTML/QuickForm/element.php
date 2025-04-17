@@ -399,7 +399,7 @@ class HTML_QuickForm_element extends HTML_Common
         $elementName = $this->getName();
         if (isset($values[$elementName])) {
             return $values[$elementName];
-        } elseif (strpos($elementName, '[')) {
+        } elseif ($elementName != null && strpos($elementName, '[')) {
             // Fix checkbox
             if ($this->_type === 'checkbox') {
                 $attributeValue = $this->getAttribute('value');

@@ -94,6 +94,7 @@ class PDOConnection extends PDO implements ConnectionInterface, ServerInfoAwareC
     #[ReturnTypeWillChange]
     public function quote($value, $type = ParameterType::STRING)
     {
+        if ($value == null) {$value = '';}
         return parent::quote($value, $type);
     }
 

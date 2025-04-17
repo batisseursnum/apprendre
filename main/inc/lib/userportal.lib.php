@@ -16,6 +16,8 @@ class IndexManager
     public $tpl;
     public $name = '';
     public $home = '';
+    public $user_id = 0;
+    public $load_directories_preview = false;
     public $default_home = 'home/';
 
     /**

@@ -325,7 +325,9 @@ class HTML_QuickForm_Renderer_Default extends HTML_QuickForm_Renderer
             $html = str_replace('{label}', $nameLabel, $template);
         }
         $html = str_replace('{label-for}', $labelFor, $html);
+        if ($icon == null) { $icon = '';}
         $html = str_replace('{icon}', $icon, $html);
+        if ($extraLabelClass == null) { $extraLabelClass = '';}
         $html = str_replace('{extra_label_class}', $extraLabelClass, $html);
 
         if ($required) {

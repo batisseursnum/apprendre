@@ -38,6 +38,7 @@ class UserGroup extends Model
     public $access_url_rel_user;
     public $table_course;
     public $table_user;
+    public $usergroup_table;
 
     /**
      * Set ups DB tables.

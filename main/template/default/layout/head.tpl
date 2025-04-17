@@ -14,8 +14,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{ title_string }}</title>
 {{ social_meta }}
-{{ css_static_file_to_string }}
+
 {{ js_file_to_string }}
+
+
 {{ extra_headers }}
 
 {% if _s.language_interface %}
@@ -24,5 +26,4 @@
 <script src="{{ _p.web }}web/build/main.js"></script>
 {% endif %}
 
-{{ css_custom_file_to_string }}
-{{ css_style_print }}
+
