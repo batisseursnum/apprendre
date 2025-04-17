@@ -307,7 +307,7 @@ $(function() {
                 instance.options.markersRolls = {};
 
                 qMarkersRolls.forEach(function (qMarkerRoll) {
-                    var url = 'http://localhost/apprendre_lms/main/exercise/exercise_submit.php?&'
+                    var url = 'http://localhost/apprendre_lms/main/exercise/exercise_submit.php?cidReq=DOCUMENTS&id_session=0&gidReq=0&gradebook=0&origin=embeddable&'
                         + $.param({
                             exerciseId: qMarkerRoll[1],
                             learnpath_id: 0,
