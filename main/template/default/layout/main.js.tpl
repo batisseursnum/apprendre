@@ -450,6 +450,7 @@ $(function() {
     if (window.self === window.top) {
         checkSessionTime();
     }
+
 });
 
 $(window).resize(function() {
@@ -741,16 +742,46 @@ function copyTextToClipBoard(elementId)
 
 function checkSessionTime()
 {
-    fetch('/main/inc/ajax/session_clock.ajax.php?action=time')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Server error: ' + response.statusText);
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data.sessionTimeLeft <= 0) {
-            if (!document.getElementById('session-checker-overlay')) {
+
+       $.ajax({
+        url: 'main/inc/ajax/session_clock.ajax.php?action=time',
+        method: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            if (data.sessionTimeLeft <= 0) {
+                if (!document.getElementById('session-checker-overlay')) {
+                    clearInterval(sessionCounterInterval);
+
+                    var counterOverlay = document.getElementById('session-count-overlay');
+                    if (counterOverlay) {
+                        counterOverlay.remove();
+                    }
+
+                    var now = new Date();
+                    var day = String(now.getDate()).padStart(2, '0');
+                    var month = String(now.getMonth() + 1).padStart(2, '0');
+                    var year = now.getFullYear();
+                    var hour = String(now.getHours()).padStart(2, '0');
+                    var minutes = String(now.getMinutes()).padStart(2, '0');
+
+                    var dateTimeSessionExpired = day + '/' + month + '/' + year + ' ' + hour + ':' + minutes;
+
+                    document.body.insertAdjacentHTML('afterbegin', '<div id="session-checker-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,1);display:flex;justify-content:center;align-items:center;z-index:1000;"><div id="session-checker-modal" style="background:white;padding:20px;border-radius:5px;box-shadow:0010pxrgba(0,0,0,0.5);width:35%;text-align:center;"><p style="margin-bottom:20px;">{{ 'SessionExpiredAt' | get_lang | escape('js')}} ' + dateTimeSessionExpired + '.</p><button class="btn btn-primary" onclick="window.location.pathname = \'/\';">OK</button></div></div>');
+                }
+            } else if (data.sessionTimeLeft <= 110) {
+                sessionRemainingSeconds = data.sessionTimeLeft - 5;
+
+                if (sessionRemainingSeconds < 0) {
+                    sessionRemainingSeconds = 0;
+                }
+
+                if (!document.getElementById('session-count-overlay')) {
+                    document.body.insertAdjacentHTML('afterbegin', '<div id="session-count-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;justify-content:center;align-items:center;z-index:1000;"><div id="session-checker-modal" style="background:white;padding:20px;border-radius:5px;box-shadow:0010pxrgba(0,0,0,0.5);width:35%;text-align:center;"><p id="session-counter" style="margin-bottom:20px;">{{ 'DueToInactivityTheSessionIsGoingToClose' | get_lang | escape('js')}} ' + sessionRemainingSeconds + ' {{ 'Seconds' | get_lang | escape('js')}}</p><button class="btn btn-primary" id="btn-session-extend" onclick="extendSession();">{{ 'KeepGoing' | get_lang | escape('js')}}</button></div></div>');
+
+                    sessionCounterInterval = setInterval(updateSessionTimeCounter, 1000);
+                }
+                setTimeout(checkSessionTime, 60000);
+            } else {
                 clearInterval(sessionCounterInterval);
 
                 var counterOverlay = document.getElementById('session-count-overlay');
@@ -758,42 +789,13 @@ function checkSessionTime()
                     counterOverlay.remove();
                 }
 
-                var now = new Date();
-                var day = String(now.getDate()).padStart(2, '0');
-                var month = String(now.getMonth() + 1).padStart(2, '0');
-                var year = now.getFullYear();
-                var hour = String(now.getHours()).padStart(2, '0');
-                var minutes = String(now.getMinutes()).padStart(2, '0');
-
-                var dateTimeSessionExpired = day + '/' + month + '/' + year + ' ' + hour + ':' + minutes;
-
-                document.body.insertAdjacentHTML('afterbegin', '<div id="session-checker-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,1);display:flex;justify-content:center;align-items:center;z-index:1000;"><div id="session-checker-modal" style="background:white;padding:20px;border-radius:5px;box-shadow:0010pxrgba(0,0,0,0.5);width:35%;text-align:center;"><p style="margin-bottom:20px;">{{ 'SessionExpiredAt' | get_lang | escape('js')}} ' + dateTimeSessionExpired + '.</p><button class="btn btn-primary" onclick="window.location.pathname = \'/\';">OK</button></div></div>');
+                setTimeout(checkSessionTime, 60000);
             }
-        } else if (data.sessionTimeLeft <= 110) {
-            sessionRemainingSeconds = data.sessionTimeLeft - 5;
-
-            if (sessionRemainingSeconds < 0) {
-                sessionRemainingSeconds = 0;
-            }
-
-            if (!document.getElementById('session-count-overlay')) {
-                document.body.insertAdjacentHTML('afterbegin', '<div id="session-count-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;justify-content:center;align-items:center;z-index:1000;"><div id="session-checker-modal" style="background:white;padding:20px;border-radius:5px;box-shadow:0010pxrgba(0,0,0,0.5);width:35%;text-align:center;"><p id="session-counter" style="margin-bottom:20px;">{{ 'DueToInactivityTheSessionIsGoingToClose' | get_lang | escape('js')}} ' + sessionRemainingSeconds + ' {{ 'Seconds' | get_lang | escape('js')}}</p><button class="btn btn-primary" id="btn-session-extend" onclick="extendSession();">{{ 'KeepGoing' | get_lang | escape('js')}}</button></div></div>');
-
-                sessionCounterInterval = setInterval(updateSessionTimeCounter, 1000);
-            }
-            setTimeout(checkSessionTime, 60000);
-        } else {
-            clearInterval(sessionCounterInterval);
-
-            var counterOverlay = document.getElementById('session-count-overlay');
-            if (counterOverlay) {
-                counterOverlay.remove();
-            }
-
-            setTimeout(checkSessionTime, 60000);
+     },
+        error: function(xhr, status, error) {
+            console.log('Error:', error);
         }
-    })
-    .catch(error => console.error('Error:', error));
+    });
 }
 
 function extendSession() {

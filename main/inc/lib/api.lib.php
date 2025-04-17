@@ -20,7 +20,7 @@ use Symfony\Component\Finder\Finder;
  */
 
 // PHP version requirement.
-define('REQUIRED_PHP_VERSION', '7.4');
+define('REQUIRED_PHP_VERSION', '8.1');
 define('REQUIRED_MIN_MEMORY_LIMIT', '128');
 define('REQUIRED_MIN_UPLOAD_MAX_FILESIZE', '10');
 define('REQUIRED_MIN_POST_MAX_SIZE', '10');
@@ -5674,7 +5674,9 @@ function api_get_permissions_for_new_directories()
 {
     static $permissions;
     if (!isset($permissions)) {
-        $permissions = trim(api_get_setting('permissions_for_new_directories'));
+        $perm = api_get_setting('permissions_for_new_directories');
+        $perm = $perm ?? '';
+        $permissions = trim($perm);
         // The default value 0777 is according to that in the platform administration panel after fresh system installation.
         $permissions = octdec(!empty($permissions) ? $permissions : '0777');
     }
