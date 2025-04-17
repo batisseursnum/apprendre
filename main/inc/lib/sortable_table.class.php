@@ -71,6 +71,10 @@ class SortableTable extends HTML_Table
      */
     public $form_actions;
     /**
+     * The name of the checkbox.
+    */
+    public $checkbox_name;
+    /**
      * Additional parameters to pass in the URL.
      */
     public $additional_parameters;

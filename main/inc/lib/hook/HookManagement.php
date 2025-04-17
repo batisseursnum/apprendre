@@ -8,6 +8,12 @@
  */
 class HookManagement implements HookManagementInterface
 {
+
+    public $tables = [];
+    public $hookCalls = [];
+    public $hookEvents = [];
+    public $hookObservers = [];
+    
     /**
      * Constructor.
      */

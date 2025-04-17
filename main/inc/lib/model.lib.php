@@ -10,6 +10,15 @@
 class Model
 {
     public $table;
+    
+    public $table_user;
+    public $table_skill_rel_gradebook;
+    public $table_skill_rel_user;
+    public $table_course;
+    public $table_skill_rel_skill;
+    public $table_gradebook;
+    public $sessionTable;
+
     public $columns;
     public $required;
     public $is_course_model = false;

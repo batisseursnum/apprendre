@@ -312,6 +312,7 @@ $form = Tracking::setUserSearchForm($form);
 $totalTimeSpent = null;
 $averageScore = null;
 $posts = null;
+$averageTimeSpentPerStudent = null;
 
 if ($skipData === false) {
     if (!empty($students)) {

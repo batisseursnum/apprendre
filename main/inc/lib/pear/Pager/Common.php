@@ -144,6 +144,9 @@ class Pager_Common
      */
     var $_fixFileName = true;
 
+    var $_url = true;
+    var $_pageData = array();
+
     /**
      * @var boolean you have to use FALSE with mod_rewrite
      * @access private

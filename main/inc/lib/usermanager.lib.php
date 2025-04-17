@@ -5643,6 +5643,7 @@ class UserManager
         }
 
         $column = Database::escape_string($column);
+        if ($direction == null) { $direction = ''; }
         $direction = in_array(strtolower($direction), ['asc', 'desc']) ? $direction : null;
 
         $userConditions = '';
