@@ -24,15 +24,15 @@ body > main footer.footer {
   overflow: hidden;
 }
 
-#cm-header .logo{
+#cm-header .logo {
   position : fixed;
   top : 5px;
   left : 23px;
   z-index: 2;
 }
 #cm-header .logo img{
-  max-width: 80%;
-  height: auto;
+  width : auto;
+  height : 45px;
 }
 
 .cm-content_fixed {
@@ -58,15 +58,26 @@ a:focus {
   }
 }
 
-#navbar {
-  display: flex!important;
-  justify-content: flex-end!important;
-  width: 100%!important;
+@media (min-width: 768px) {
+  #navbar {
+    display: flex!important;
+    justify-content: flex-end!important;
+    width: 100%!important;
+  }
+  #navbar .navbar-nav {
+    display: flex!important;
+    margin-left: auto!important;
+  }
 }
-#navbar .navbar-nav {
-  display: flex!important;
-  margin-left: auto!important;
+
+@media (max-width: 768px) {
+  #navbar {
+    background: #ffffff!important;
+    padding-bottom: 20px!important;
+    border-bottom: 10px solid #c0c0c0!important;
+  }
 }
+
 #navbar .navbar-nav > li {
   float: none!important;
 }
@@ -106,8 +117,9 @@ a:focus {
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus{
-  color: #262626;
-  background-color:#ffffff;
+  color: #000000;
+  background-color:#fefbfb;
+  font-weight: bold;
 }
 .navbar-default .navbar-nav > li > a{
   color: #262626;
@@ -145,6 +157,9 @@ a:focus {
   border-color: #2C5B8E;
 }
 
+.navbar-toggle {
+  background-color: #2C5B8E!important;
+}
 .navbar-default .navbar-toggle{
   border-color: #00677C;
 }
