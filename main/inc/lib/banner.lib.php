@@ -116,13 +116,13 @@ function get_tabs($courseId = null)
         $navigation['social']['icon'] = 'social-network.png';
     }
 
-    // Dashboard
-    if (api_is_platform_admin() || api_is_drh() || api_is_session_admin()) {
+    // Dashboard obsolete
+    /* if (api_is_platform_admin() || api_is_drh() || api_is_session_admin()) {
         $navigation['dashboard']['url'] = api_get_path(WEB_CODE_PATH).'dashboard/index.php';
         $navigation['dashboard']['title'] = get_lang('Dashboard');
         $navigation['dashboard']['key'] = 'dashboard';
         $navigation['dashboard']['icon'] = 'dashboard.png';
-    }
+    } */
 
     // Custom Tabs See BT#7180
     $customTabs = getCustomTabs();
@@ -431,14 +431,15 @@ function return_navigation_array()
             $menu_navigation['social'] = isset($possible_tabs['social']) ? $possible_tabs['social'] : null;
         }
 
-        // Dashboard
+        // Dashboard obsolete
+        /*
         if (api_get_setting('show_tabs', 'dashboard') == 'true') {
             if (api_is_platform_admin() || api_is_drh() || api_is_session_admin()) {
                 $navigation['dashboard'] = isset($possible_tabs['dashboard']) ? $possible_tabs['dashboard'] : null;
             }
         } else {
             $menu_navigation['dashboard'] = isset($possible_tabs['dashboard']) ? $possible_tabs['dashboard'] : null;
-        }
+        } */
 
         $installed = AppPlugin::getInstance()->isInstalled('studentfollowup');
         if ($installed) {
