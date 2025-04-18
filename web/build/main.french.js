@@ -451,6 +451,20 @@ $(document).scroll(function() {
             }
         }
     }
+
+    if ($('.navbar-default').length) {
+
+        
+
+        if ($(this).scrollTop() > 10) {
+            $('.navbar-default').addClass('navbar-default_fixed');
+            $('#cm-content').addClass('cm-content_fixed');
+        } else {
+            $('.navbar-default').removeClass('navbar-default_fixed');
+            $('#cm-content').removeClass('cm-content_fixed');
+        }
+    }
+
 });
 
 function get_url_params(q, attribute) {
