@@ -1216,6 +1216,8 @@ function api_htmlentities($string, $quote_style = ENT_COMPAT, $encoding = 'UTF-8
             $string = str_replace(['&', '\'', '"', '<', '>'], ['&amp;', '&#039;', '&quot;', '&lt;', '&gt;'], $string);
             break;
     }
+    // &#039; is not reconized by the browser
+    $string = str_replace(['&#039;'], [" "], $string);
 
     return htmlspecialchars($string, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 }
